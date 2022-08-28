@@ -1,5 +1,5 @@
 #include"app.hh"
-#include"../gui/splash_window.h"
+#include"../gui/splash_window.hh"
 #include"bits/unique_ptr.h"
 
 app::App::App(){
@@ -9,7 +9,7 @@ app::App::App(){
 }
 
 app::App::~App(){
-    
+
 }
 
 void app::App::draw(){

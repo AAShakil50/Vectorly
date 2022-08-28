@@ -23,15 +23,13 @@ namespace app {
         AppConfiguration m_configurations;
 
     public:
-        /**
-         * Constructs a new App object. Generates default values.
-         */
+        // Constructs a new App object. Generates default values.
         App();
-        ~App();
 
-        /**
-         * Draws the application with required configurations. This will be in loop,
-         */
+        // Destructs the App object.
+        ~App();
+        
+        // Draws the application with required configurations. This will be in loop,
         void draw();
     };
 

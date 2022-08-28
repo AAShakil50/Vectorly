@@ -8,6 +8,7 @@ namespace gui{
 class WindowManager {
 private:
 public:
+    // Base function to draw. Will be in endless loop. 
     virtual void draw();
 };
 

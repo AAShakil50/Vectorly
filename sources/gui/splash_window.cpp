@@ -1,9 +1,11 @@
-#include"splash_window.h"
+#include"splash_window.hh"
+#include<unordered_map>
+#include<string>
+#include<vector>
 #include<math.h>
 
-gui::SplashWindow::SplashWindow()  {
-    ImGuiWindowFlags flags = ImGuiWindowFlags_Modal;
-    flags | ImGuiWindowFlags_NoMove;
+gui::SplashWindow::SplashWindow() {
+    ImGuiWindowFlags flags = ImGuiWindowFlags_NoMove;
 
     // ImGui::ShowDemoWindow();
 }
@@ -16,43 +18,37 @@ void gui::SplashWindow::draw() {
 }
 
 void gui::SplashWindow::m_build_menubar() {
-    if(ImGui::BeginMainMenuBar()){
-        if(ImGui::BeginMenu("File")){
-            ImGui::MenuItem("New");
-            ImGui::MenuItem("Open");
-            ImGui::MenuItem("Save");
-            ImGui::MenuItem("Save As");
-            ImGui::EndMenu();
-        }
-        
-        if(ImGui::BeginMenu("Edit")){
-            ImGui::MenuItem("Copy");
-            ImGui::MenuItem("Cut");
-            ImGui::MenuItem("Paste");
-            ImGui::EndMenu();
-        }
-        
-        bool is_what_selected;
+    // Main menu items to set up. Because unordered map add things to top.
+    std::unordered_map<std::string,
+        std::vector<std::string>> menu_objects;
+    
+    menu_objects["View"] = { "Grid", "Panel", "FPS" };
+    menu_objects["Edit"] = { "Copy", "Cut", "Paste", "Bring to Front", "Send to Back" };
+    menu_objects["File"] = { "New", "Open", "Save", "Save As" };
 
-        if(ImGui::BeginMenu("View")){
-            ImGui::MenuItem("Grid");
-            ImGui::MenuItem("Panel");
-            ImGui::MenuItem("FPS");
-            ImGui::MenuItem("Label");
-            ImGui::RadioButton("What Box?", &is_what_selected);
-            ImGui::EndMenu();
+    if(ImGui::BeginMainMenuBar()){
+        for(auto menu: menu_objects){
+            if(ImGui::BeginMenu(menu.first.c_str())){
+                for(auto menu_item: menu.second){
+                    ImGui::MenuItem(menu_item.c_str());
+                }
+                ImGui::EndMenu();
+            }
         }
-        
         ImGui::EndMainMenuBar();
     }
     
 }
 
 void gui::SplashWindow::m_build_project_panel() {
-    if(ImGui::Begin("Editor", (bool *)__null, ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoCollapse)){
+    ImGuiWindowFlags flags = ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoCollapse
+        | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize;
+
+    if(ImGui::Begin("Editor", (bool *)__null, flags)){
         ImGui::SetWindowPos(ImVec2(0, 20));
-        int win_width = ImGui::GetWindowWidth();
-        int win_height = ImGui::GetWindowHeight();
+        int win_width = 1280;
+        int win_height = 720;
+        ImGui::SetWindowSize(ImVec2(win_width, win_height - 20));
         
         ImGui::End();
     }
