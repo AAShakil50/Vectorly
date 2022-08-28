@@ -1,7 +1,14 @@
-// Dear ImGui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
-// (GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
-// If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
-// Read online: https://github.com/ocornut/imgui/tree/master/docs
+/**
+ * @file main.cpp
+ * @author aashakil50
+ * @brief This is the main entry point of the application. This is just a boiler plate
+ *      to set up ImGUI. Our only code is in line 162
+ * @version 0.1
+ * @date 2022-08-27
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
@@ -11,11 +18,9 @@
 #include <GLES2/gl2.h>
 #endif
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
-#include "gui/window.h"
 
-// [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
-// To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
-// Your own project should not be affected, as you are likely to link with a newer binary of GLFW that is adequate for your version of Visual Studio.
+#include"app/app.hh"
+
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
@@ -97,6 +102,8 @@ int main(int, char**)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+    app::App main_app;
+
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
@@ -155,7 +162,8 @@ int main(int, char**)
         // }
         */
 
-        GUI::SplashWindow();
+        //Gui user code here
+        main_app.draw();
 
         // Rendering
         ImGui::Render();

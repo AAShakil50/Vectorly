@@ -1,6 +1,7 @@
 set(
     SOURCES
-    window.cpp
+    window_manager.cpp
+    splash_window.cpp
 )
 
 add_library(Gui STATIC ${SOURCES})

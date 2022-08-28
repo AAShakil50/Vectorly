@@ -1,7 +1,21 @@
-#include "window.h"
+#include"splash_window.h"
 #include<math.h>
 
-void GUI::SplashWindow::m_build_menubar() {
+gui::SplashWindow::SplashWindow()  {
+    ImGuiWindowFlags flags = ImGuiWindowFlags_Modal;
+    flags | ImGuiWindowFlags_NoMove;
+
+    // ImGui::ShowDemoWindow();
+}
+
+void gui::SplashWindow::draw() {
+    this->m_build_menubar();
+    this->m_build_project_panel();
+    this->m_build_editor_panel();
+    this->m_build_timeline_panel();
+}
+
+void gui::SplashWindow::m_build_menubar() {
     if(ImGui::BeginMainMenuBar()){
         if(ImGui::BeginMenu("File")){
             ImGui::MenuItem("New");
@@ -34,47 +48,25 @@ void GUI::SplashWindow::m_build_menubar() {
     
 }
 
-void GUI::SplashWindow::m_build_project_panel() {
-    if(ImGui::Begin("Intf Handler", (bool *)__null, ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoCollapse)){
+void gui::SplashWindow::m_build_project_panel() {
+    if(ImGui::Begin("Editor", (bool *)__null, ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoCollapse)){
         ImGui::SetWindowPos(ImVec2(0, 20));
         int win_width = ImGui::GetWindowWidth();
         int win_height = ImGui::GetWindowHeight();
-        ImGui::SetWindowSize(ImGui::GetMainViewport()->Size);
-        if(ImGui::BeginTable("UInf", 2)) {
-            ImGui::TableNextRow();
-            ImGui::TableNextColumn();
-            ImGui::Text("Here's the table");
-
-            ImGui::TableNextColumn();
-            ImGui::Text("Here's the 2nd column");
-            
-            ImGui::EndTable();
-        }
+        
         ImGui::End();
     }
     
 }
 
-void GUI::SplashWindow::m_build_editor_panel() {
+void gui::SplashWindow::m_build_editor_panel() {
 
 }
 
-void GUI::SplashWindow::m_build_timeline_panel() {
+void gui::SplashWindow::m_build_timeline_panel() {
 
 }
 
-GUI::SplashWindow::SplashWindow()  {
-    ImGuiWindowFlags flags = ImGuiWindowFlags_Modal;
-    flags | ImGuiWindowFlags_NoMove;
 
-    this->m_build_menubar();
-    this->m_build_project_panel();
-    this->m_build_editor_panel();
-    this->m_build_timeline_panel();
-    
-
-    // ImGui::ShowDemoWindow();
-}
-
-GUI::SplashWindow::~SplashWindow() {
+gui::SplashWindow::~SplashWindow() {
 }
